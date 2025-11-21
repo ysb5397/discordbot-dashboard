@@ -174,18 +174,26 @@ class _ShellScreenState extends State<ShellScreen> {
   Widget _navItem(BuildContext context, int index, IconData icon, String label,
       int selectedIndex, bool isMobile) {
     final isSelected = selectedIndex == index;
-    return ListTile(
-      leading: Icon(icon, color: isSelected ? Colors.white : Colors.grey),
-      title: Text(label,
-          style: TextStyle(
-              color: isSelected ? Colors.white : Colors.grey,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)),
-      tileColor: isSelected ? const Color(0xFF40444b) : null,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      onTap: () {
-        _onItemTapped(index, context);
-        if (isMobile) Navigator.pop(context); // 모바일이면 Drawer 닫기
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: ListTile(
+        leading: Icon(icon,
+            color: isSelected ? Colors.white : const Color(0xFF9CA3AF),
+            size: 20),
+        title: Text(label,
+            style: TextStyle(
+                color: isSelected ? Colors.white : const Color(0xFF9CA3AF),
+                fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                fontSize: 14)),
+        tileColor: isSelected ? const Color(0xFF40444b) : null,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        dense: true,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        onTap: () {
+          _onItemTapped(index, context);
+          if (isMobile) Navigator.pop(context); // 모바일이면 Drawer 닫기
+        },
+      ),
     );
   }
 
@@ -197,50 +205,76 @@ class _ShellScreenState extends State<ShellScreen> {
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      color: const Color(0xFF2f3136),
+      decoration: const BoxDecoration(
+        color: Color(0xFF2f3136),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 2, offset: Offset(0, 1))
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               const Text("Bot Admin",
-                  style: TextStyle(color: Color(0xFF5865F2))),
-              const SizedBox(width: 8),
-              const Text("/", style: TextStyle(color: Colors.grey)),
-              const SizedBox(width: 8),
+                  style: TextStyle(
+                      color: Color(0xFF818CF8),
+                      fontWeight: FontWeight.w500)), // Indigo-400
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text("/",
+                    style: TextStyle(color: Color(0xFF9CA3AF))), // gray-400
+              ),
               Text(currentTitle,
                   style: const TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18)),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16)),
             ],
           ),
           Row(
             children: [
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color:
+                      const Color(0xFF22C55E).withOpacity(0.1), // green-500/10
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.green.withOpacity(0.2)),
+                  border: Border.all(
+                      color: const Color(0xFF22C55E).withOpacity(0.2)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.circle, size: 10, color: Colors.green),
-                    SizedBox(width: 8),
-                    Text("System Healthy",
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF22C55E),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF22C55E).withOpacity(0.7),
+                            blurRadius: 4,
+                            spreadRadius: 1,
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text("System Healthy",
                         style: TextStyle(
-                            color: Colors.green,
+                            color: Color(0xFF4ADE80), // green-400
                             fontSize: 12,
-                            fontWeight: FontWeight.bold)),
+                            fontWeight: FontWeight.w500)),
                   ],
                 ),
               ),
               const SizedBox(width: 16),
               IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.notifications, color: Colors.grey)),
+                  icon: const Icon(Icons.notifications,
+                      color: Color(0xFF9CA3AF))),
             ],
           )
         ],
